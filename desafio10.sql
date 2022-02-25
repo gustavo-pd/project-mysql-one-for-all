@@ -9,5 +9,5 @@ JOIN SpotifyClone.users AS U
 JOIN SpotifyClone.subscriptions AS S
   ON S.plan_id = U.plan_id
 WHERE S.plan_name = 'gratuito' OR S.plan_name = 'pessoal'
-GROUP BY T.name
-ORDER BY T.name;
+GROUP BY nome
+ORDER BY nome;
