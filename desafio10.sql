@@ -1,15 +1,12 @@
-SELECT 
-    T.name AS nome, COUNT(H.user_id) AS reproducoes
+SELECT
+	s.name AS nome, COUNT(*) AS reproducoes
 FROM
-    SpotifyClone.user_historic AS H
-        JOIN
-    SpotifyClone.tracks AS T ON T.track_id = H.track_id
-        JOIN
-    SpotifyClone.users AS U ON U.user_id = H.user_id
-        JOIN
-    SpotifyClone.subscriptions AS S ON S.plan_id = U.plan_id
+  SpotifyClone.user_historic AS h
+JOIN
+  SpotifyClone.tracks AS s ON s.track_id = h.track_id
+JOIN
+  SpotifyClone.users AS u ON u.user_id = h.user_id
 WHERE
-    S.plan_name = 'gratuito'
-        OR S.plan_name = 'pessoal'
+  u.plan_id IN (1,4)
 GROUP BY nome
 ORDER BY nome;

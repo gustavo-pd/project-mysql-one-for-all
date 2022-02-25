@@ -4,58 +4,58 @@ CREATE DATABASE SpotifyClone;
 
 CREATE TABLE SpotifyClone.subscriptions(
 	`plan_id` INT PRIMARY KEY AUTO_INCREMENT,
-    `plan_name` VARCHAR(30) NOT NULL,
-    `plan_value` DOUBLE NOT NULL
+  `plan_name` VARCHAR(30) NOT NULL,
+  `plan_value` DOUBLE NOT NULL
 );
 
 INSERT INTO SpotifyClone.subscriptions(plan_name, plan_value)
 	VALUES
 		('gratuito', 0),
-        ('familiar', 7.99),
-        ('universitário', 5.99),
-        ('pessoal', 6.99);
+    ('familiar', 7.99),
+    ('universitário', 5.99),
+    ('pessoal', 6.99);
 
 CREATE TABLE SpotifyClone.users(
 	`user_id` INT PRIMARY KEY AUTO_INCREMENT,
-    `first_name` VARCHAR(40) NOT NULL,
-    `age` INT NOT NULL,
-    `plan_id` INT,
-    `subscription_date` DATE NOT NULL,
-    FOREIGN KEY (plan_id) REFERENCES SpotifyClone.subscriptions(plan_id)
+  `first_name` VARCHAR(40) NOT NULL,
+  `age` INT NOT NULL,
+  `plan_id` INT,
+  `subscription_date` DATE NOT NULL,
+  FOREIGN KEY (plan_id) REFERENCES SpotifyClone.subscriptions(plan_id)
 );
 
 INSERT INTO SpotifyClone.users(first_name, age, plan_id, subscription_date)
 	VALUES
 		('Thati', 23, 1, '2019-10-20'),
-        ('Cintia', 35, 2, '2017-12-30'),
-        ('Bill', 20, 3, '2019-06-05'),
-        ('Roger', 45, 4, '2020-05-13'),
-        ('Norman', 58, 4, '2017-02-17'),
-        ('Patrick', 33, 2, '2017-01-06'),
-        ('Vivian', 26, 3, '2018-01-05'),
-        ('Carol', 19, 3, '2018-02-14'),
-        ('Angelina', 42, 2, '2018-04-29'),
-        ('Paul', 46, 2, '2017-01-17');
+    ('Cintia', 35, 2, '2017-12-30'),
+    ('Bill', 20, 3, '2019-06-05'),
+		('Roger', 45, 4, '2020-05-13'),
+		('Norman', 58, 4, '2017-02-17'),
+		('Patrick', 33, 2, '2017-01-06'),
+		('Vivian', 26, 3, '2018-01-05'),
+		('Carol', 19, 3, '2018-02-14'),
+		('Angelina', 42, 2, '2018-04-29'),
+		('Paul', 46, 2, '2017-01-17');
 
 CREATE TABLE SpotifyClone.artists(
 	`artist_id` INT PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(40) NOT NULL
+	`name` VARCHAR(40) NOT NULL
 );
 
 INSERT INTO SpotifyClone.artists(name)
 	VALUES
 		('Walter Phoenix'),
-        ('Peter Strong'),
-        ('Lance Day'),
-        ('Freedie Shannon'),
-        ('Tyler Isle'),
-        ('Fog');
+		('Peter Strong'),
+		('Lance Day'),
+		('Freedie Shannon'),
+		('Tyler Isle'),
+		('Fog');
 
 CREATE TABLE SpotifyClone.favorite_artists (
 	`user_id` INT NOT NULL,
-    `artist_id` INT NOT NULL,
-    PRIMARY KEY (user_id, artist_id),
-    FOREIGN KEY (user_id) REFERENCES SpotifyClone.users(user_id),
+	`artist_id` INT NOT NULL,
+	PRIMARY KEY (user_id, artist_id),
+	FOREIGN KEY (user_id) REFERENCES SpotifyClone.users(user_id),
 	FOREIGN KEY (artist_id) REFERENCES SpotifyClone.artists(artist_id)
 );
 
@@ -63,13 +63,13 @@ INSERT INTO SpotifyClone.favorite_artists(user_id, artist_id)
 	VALUES
 		(1, 1),
 		(1, 4),
-        (1, 3),
-        (2, 1),
-        (2, 3),
-        (3, 1),
-        (3, 2),
-        (4, 4),
-        (5, 5),
+		(1, 3),
+		(2, 1),
+		(2, 3),
+		(3, 1),
+		(3, 2),
+		(4, 4),
+		(5, 5),
 		(5, 6),
 		(6, 1),
 		(6, 3),
@@ -77,40 +77,40 @@ INSERT INTO SpotifyClone.favorite_artists(user_id, artist_id)
 		(7, 2),
 		(7, 5),
 		(8, 1),
-        (8, 5),
-        (9, 3),
-        (9, 4),
-        (9, 6),
-        (10, 2),
-        (10, 6);
+		(8, 5),
+		(9, 3),
+		(9, 4),
+		(9, 6),
+		(10, 2),
+		(10, 6);
 
 CREATE TABLE SpotifyClone.albuns (
 	`album_id` INT PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(60) NOT NULL,
-    `artist_id` INT,
-    `release_year` YEAR NOT NULL,
-    FOREIGN KEY (artist_id) REFERENCES SpotifyClone.artists(artist_id)
+	`name` VARCHAR(60) NOT NULL,
+	`artist_id` INT,
+	`release_year` YEAR NOT NULL,
+	FOREIGN KEY (artist_id) REFERENCES SpotifyClone.artists(artist_id)
 );
 
 INSERT INTO SpotifyClone.albuns(name, release_year, artist_id)
 	VALUES
 	('Envious', 1990, 1),
-    ('Exuberant', 1993, 1),
-    ('Hallowed Steam', 1995, 2),
-    ('Incandescent', 1998, 3),
-    ('Temporary Culture', 2001, 4),
-    ('Library of liberty', 2003, 4),
-    ('Chained Down', 2007, 5),
-    ('Cabinet of fools', 2012, 5),
-    ('No guarantees', 2015, 5),
-    ('Apparatus', 2015, 6);
+	('Exuberant', 1993, 1),
+	('Hallowed Steam', 1995, 2),
+	('Incandescent', 1998, 3),
+	('Temporary Culture', 2001, 4),
+	('Library of liberty', 2003, 4),
+	('Chained Down', 2007, 5),
+	('Cabinet of fools', 2012, 5),
+	('No guarantees', 2015, 5),
+	('Apparatus', 2015, 6);
 
 CREATE TABLE SpotifyClone.tracks(
 	`track_id` INT PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(60) NOT NULL,
-    `album_id` INT,
-    `length` INT NOT NULL,
-    FOREIGN KEY (album_id) REFERENCES SpotifyClone.albuns(album_id)
+	`name` VARCHAR(60) NOT NULL,
+	`album_id` INT,
+	`length` INT NOT NULL,
+	FOREIGN KEY (album_id) REFERENCES SpotifyClone.albuns(album_id)
 );
 
 INSERT INTO SpotifyClone.tracks(name, length, album_id)
@@ -158,11 +158,11 @@ INSERT INTO SpotifyClone.tracks(name, length, album_id)
 
 CREATE TABLE SpotifyClone.user_historic(
 	`user_id` INT NOT NULL,
-    `track_id` INT NOT NULL,
-    `playback_date` DATETIME NOT NULL,
-    PRIMARY KEY (user_id, track_id),
-    FOREIGN KEY (user_id) REFERENCES SpotifyClone.users(user_id),
-    FOREIGN KEY (track_id) REFERENCES SpotifyClone.tracks(track_id)
+	`track_id` INT NOT NULL,
+	`playback_date` DATETIME NOT NULL,
+	PRIMARY KEY (user_id, track_id),
+	FOREIGN KEY (user_id) REFERENCES SpotifyClone.users(user_id),
+	FOREIGN KEY (track_id) REFERENCES SpotifyClone.tracks(track_id)
 );
 
 INSERT INTO SpotifyClone.user_historic(user_id, track_id, playback_date)
