@@ -1,5 +1,5 @@
 SELECT T.name AS cancao,
-    COUNT(H.track_id)AS reproducoes
+  COUNT(H.track_id)AS reproducoes
 FROM SpotifyClone.tracks AS T
 JOIN SpotifyClone.user_historic AS H
 	ON T.track_id = H.track_id
