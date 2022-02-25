@@ -1,10 +1,9 @@
-SELECT 
-	ROUND (MIN(S.plan_value),2) AS `faturamento_minimo`,
-	ROUND (MAX(S.plan_value),2) AS `faturamento_maximo`,
-	ROUND (AVG(S.plan_value),2) AS `faturamento_medio`,
-	ROUND (SUM(S.plan_value),2) AS `faturamento_total`
-FROM 
-	SpotifyClone.subscriptions AS S
-INNER JOIN 
+SELECT
+	CONCAT(CONVERT(MIN(S.plan_value), CHAR), '.00') AS `faturamento_minimo`,
+    CONVERT(MAX(S.plan_value), CHAR) AS `faturamento_maximo`,
+    CONVERT(ROUND(SUM(S.plan_value), 2), CHAR) AS `faturamento_total`,
+	CONVERT(ROUND(AVG(S.plan_value), 2), CHAR) AS `faturamento_medio`
+FROM
 	SpotifyClone.users AS U
-    ON S.plan_id = U.plan_id;
+JOIN SpotifyClone.subscriptions AS S
+	ON S.plan_id = U.plan_id;
